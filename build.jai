@@ -4,10 +4,7 @@
 #import "Basic";
 #import "Compiler";
 
-#run
-{
-	set_working_directory( #filepath );
-
+#run {
 	print( "Building static library:\n" );
 	#if OS == .WINDOWS {
 		build_cpp_static_lib( "cgltf", "cgltf.cpp", extra=string.[
