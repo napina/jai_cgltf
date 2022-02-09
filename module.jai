@@ -26,8 +26,8 @@ cgltf_result :: enum {
 }
 
 cgltf_memory_options :: struct {
-	alloc :: #type ( user: *void, size: cgltf_size ) -> *void;
-	free :: #type ( user: *void, ptr: *void );
+	alloc: #type ( user: *void, size: cgltf_size ) -> *void;
+	free: #type ( user: *void, ptr: *void );
 	user_data: *void;
 }
 
