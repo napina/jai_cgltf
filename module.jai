@@ -4,13 +4,13 @@ cgltf_int :: #type s32;
 cgltf_uint :: #type u32;
 cgltf_bool :: #type s32;
 
-cgltf_file_type :: enum {
+cgltf_file_type :: enum s32 {
 	cgltf_file_type_invalid;
 	cgltf_file_type_gltf;
 	cgltf_file_type_glb;
 }
 
-cgltf_result :: enum {
+cgltf_result :: enum s32 {
 	cgltf_result_success;
 	cgltf_result_data_too_short;
 	cgltf_result_unknown_format;
@@ -42,13 +42,13 @@ cgltf_options :: struct {
 	file: cgltf_file_options;
 }
 
-cgltf_buffer_view_type :: enum {
+cgltf_buffer_view_type :: enum s32 {
 	cgltf_buffer_view_type_invalid;
 	cgltf_buffer_view_type_indices;
 	cgltf_buffer_view_type_vertices;
 }
 
-cgltf_attribute_type :: enum {
+cgltf_attribute_type :: enum s32 {
 	cgltf_attribute_type_invalid;
 	cgltf_attribute_type_position;
 	cgltf_attribute_type_normal;
@@ -59,7 +59,7 @@ cgltf_attribute_type :: enum {
 	cgltf_attribute_type_weights;
 }
 
-cgltf_component_type :: enum {
+cgltf_component_type :: enum s32 {
 	cgltf_component_type_invalid;
 	cgltf_component_type_r_8; /* BYTE */
 	cgltf_component_type_r_8u; /* UNSIGNED_BYTE */
@@ -69,7 +69,7 @@ cgltf_component_type :: enum {
 	cgltf_component_type_r_32f; /* FLOAT */
 }
 
-cgltf_type :: enum {
+cgltf_type :: enum s32 {
 	cgltf_type_invalid;
 	cgltf_type_scalar;
 	cgltf_type_vec2;
@@ -80,7 +80,7 @@ cgltf_type :: enum {
 	cgltf_type_mat4;
 }
 
-cgltf_primitive_type :: enum {
+cgltf_primitive_type :: enum s32 {
 	cgltf_primitive_type_points;
 	cgltf_primitive_type_lines;
 	cgltf_primitive_type_line_loop;
@@ -90,13 +90,13 @@ cgltf_primitive_type :: enum {
 	cgltf_primitive_type_triangle_fan;
 }
 
-cgltf_alpha_mode :: enum {
+cgltf_alpha_mode :: enum s32 {
 	cgltf_alpha_mode_opaque;
 	cgltf_alpha_mode_mask;
 	cgltf_alpha_mode_blend;
 }
 
-cgltf_animation_path_type :: enum {
+cgltf_animation_path_type :: enum s32 {
 	cgltf_animation_path_type_invalid;
 	cgltf_animation_path_type_translation;
 	cgltf_animation_path_type_rotation;
@@ -104,26 +104,26 @@ cgltf_animation_path_type :: enum {
 	cgltf_animation_path_type_weights;
 }
 
-cgltf_interpolation_type :: enum {
+cgltf_interpolation_type :: enum s32 {
 	cgltf_interpolation_type_linear;
 	cgltf_interpolation_type_step;
 	cgltf_interpolation_type_cubic_spline;
 }
 
-cgltf_camera_type :: enum {
+cgltf_camera_type :: enum s32 {
 	cgltf_camera_type_invalid;
 	cgltf_camera_type_perspective;
 	cgltf_camera_type_orthographic;
 }
 
-cgltf_light_type :: enum {
+cgltf_light_type :: enum s32 {
 	cgltf_light_type_invalid;
 	cgltf_light_type_directional;
 	cgltf_light_type_point;
 	cgltf_light_type_spot;
 }
 
-cgltf_data_free_method :: enum {
+cgltf_data_free_method :: enum s32 {
 	cgltf_data_free_method_none;
 	cgltf_data_free_method_file_release;
 	cgltf_data_free_method_memory_free;
@@ -150,14 +150,14 @@ cgltf_buffer :: struct {
 	extensions: *cgltf_extension;
 }
 
-cgltf_meshopt_compression_mode :: enum {
+cgltf_meshopt_compression_mode :: enum s32 {
 	cgltf_meshopt_compression_mode_invalid;
 	cgltf_meshopt_compression_mode_attributes;
 	cgltf_meshopt_compression_mode_triangles;
 	cgltf_meshopt_compression_mode_indices;
 }
 
-cgltf_meshopt_compression_filter :: enum {
+cgltf_meshopt_compression_filter :: enum s32 {
 	cgltf_meshopt_compression_filter_none;
 	cgltf_meshopt_compression_filter_octahedral;
 	cgltf_meshopt_compression_filter_quaternion;
