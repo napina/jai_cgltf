@@ -1,5 +1,3 @@
-// Copyright (c) 2022 Ville Ruusutie
-
 #import "BuildCpp";
 #import "Basic";
 #import "Compiler";

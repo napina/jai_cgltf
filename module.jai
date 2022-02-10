@@ -1,5 +1,3 @@
-// Copyright (c) 2022 Ville Ruusutie
-
 cgltf_size :: #type u64;
 cgltf_float :: #type float;
 cgltf_int :: #type s32;
