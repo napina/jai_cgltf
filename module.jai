@@ -654,4 +654,4 @@ cgltf_copy_extras_json :: ( data: *cgltf_data, extras: *cgltf_extras, dest: *u8,
 
 #scope_file
 
-cgltflib :: #foreign_library, no_dll "cgltf";
+cgltflib :: #library, no_dll "cgltf";

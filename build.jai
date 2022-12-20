@@ -6,8 +6,8 @@
 	print( "Building static library:\n" );
 	#if OS == .WINDOWS {
 		build_cpp_static_lib( "cgltf", "cgltf.cpp", extra=string.[
-        	"/I\"cgltf\"",
-        	"/D\"_CRT_SECURE_NO_WARNINGS\""
+        	"/Icgltf",
+        	"/D_CRT_SECURE_NO_WARNINGS"
         ] );
 	}
 
