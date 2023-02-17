@@ -4,12 +4,13 @@
 
 #run {
 	print( "Building static library:\n" );
-	#if OS == .WINDOWS {
-		build_cpp_static_lib( "cgltf", "cgltf.cpp", extra=string.[
-        	"/Icgltf",
-        	"/D_CRT_SECURE_NO_WARNINGS"
-        ] );
+
+	extra := #ifx OS == .WINDOWS {
+		string.["/Icgltf", "/D_CRT_SECURE_NO_WARNINGS"];
+	} else {
+		string.["-Icgltf", "-D_CRT_SECURE_NO_WARNINGS"];
 	}
 
+	build_cpp_static_lib( "cgltf", "cgltf.cpp", extra=extra );
 	set_build_options_dc( .{do_output=false} );
 };
