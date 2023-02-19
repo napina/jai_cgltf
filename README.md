@@ -5,4 +5,4 @@
 Just compile **build.jai** with Jai compiler each time you update this library sources. Use normal import to use this module in your code. For more detailed information about cglft API see **cgltf/cglft.h** file.
 
 ## Known limitations
-Builds only in Windows currently. No write API yet.
+No write API yet.
