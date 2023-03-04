@@ -1,4 +1,7 @@
+// version 1.13
+
 cgltf_size :: #type u64;
+cgltf_ssize :: #type u64;
 cgltf_float :: #type float;
 cgltf_int :: #type s32;
 cgltf_uint :: #type u32;
@@ -57,6 +60,7 @@ cgltf_attribute_type :: enum s32 {
 	cgltf_attribute_type_color;
 	cgltf_attribute_type_joints;
 	cgltf_attribute_type_weights;
+	cgltf_attribute_type_custom;
 }
 
 cgltf_component_type :: enum s32 {
@@ -130,8 +134,9 @@ cgltf_data_free_method :: enum s32 {
 }
 
 cgltf_extras :: struct {
-	start_offset: cgltf_size;
-	end_offset: cgltf_size;
+	start_offset: cgltf_size; /* this field is deprecated and will be removed in the future; use data instead */
+	end_offset: cgltf_size; /* this field is deprecated and will be removed in the future; use data instead */
+	data: *u8;
 }
 
 cgltf_extension :: struct {
@@ -344,6 +349,15 @@ cgltf_emissive_strength :: struct {
 	emissive_strength: cgltf_float;
 }
 
+cgltf_iridescence :: struct {
+	iridescence_factor: cgltf_float;
+	iridescence_texture: cgltf_texture_view;
+	iridescence_ior: cgltf_float;
+	iridescence_thickness_min: cgltf_float;
+	iridescence_thickness_max: cgltf_float;
+	iridescence_thickness_texture: cgltf_texture_view;
+}
+
 cgltf_material :: struct {
 	name: *u8;
 	has_pbr_metallic_roughness: cgltf_bool;
@@ -355,6 +369,7 @@ cgltf_material :: struct {
 	has_specular: cgltf_bool;
 	has_sheen: cgltf_bool;
 	has_emissive_strength: cgltf_bool;
+	has_iridescence: cgltf_bool;
 	pbr_metallic_roughness: cgltf_pbr_metallic_roughness;
 	pbr_specular_glossiness: cgltf_pbr_specular_glossiness;
 	clearcoat: cgltf_clearcoat;
@@ -364,6 +379,7 @@ cgltf_material :: struct {
 	transmission: cgltf_transmission;
 	volume: cgltf_volume;
 	emissive_strength: cgltf_emissive_strength;
+	iridescence: cgltf_iridescence;
 	normal_texture: cgltf_texture_view;
 	occlusion_texture: cgltf_texture_view;
 	emissive_texture: cgltf_texture_view;
@@ -389,6 +405,12 @@ cgltf_morph_target :: struct {
 }
 
 cgltf_draco_mesh_compression :: struct {
+	buffer_view: *cgltf_buffer_view;
+	attributes: *cgltf_attribute;
+	attributes_count: cgltf_size;
+}
+
+cgltf_mesh_gpu_instancing :: struct {
 	buffer_view: *cgltf_buffer_view;
 	attributes: *cgltf_attribute;
 	attributes_count: cgltf_size;
@@ -496,6 +518,8 @@ cgltf_node :: struct {
 	scale: [3]cgltf_float;
 	matrix: [16]cgltf_float;
 	extras: cgltf_extras;
+	has_mesh_gpu_instancing: cgltf_bool;
+	mesh_gpu_instancing: cgltf_mesh_gpu_instancing;
 	extensions_count: cgltf_size;
 	extensions: *cgltf_extension;
 }
@@ -643,13 +667,18 @@ cgltf_free :: ( data: *cgltf_data ) #foreign cgltflib;
 cgltf_node_transform_local :: ( node: *cgltf_node, out_matrix: *cgltf_float ) #foreign cgltflib;
 cgltf_node_transform_world :: ( node: *cgltf_node, out_matrix: *cgltf_float ) #foreign cgltflib;
 
+cgltf_buffer_view_data :: ( view: *cgltf_buffer_view ) -> *u8  #foreign cgltflib;
+
 cgltf_accessor_read_float :: ( accessor: *cgltf_accessor, index: cgltf_size, out: *cgltf_float, element_size: cgltf_size ) -> cgltf_bool #foreign cgltflib;
 cgltf_accessor_read_uint :: ( accessor: *cgltf_accessor, index: cgltf_size, out: *cgltf_uint, element_size: cgltf_size ) -> cgltf_bool #foreign cgltflib;
 cgltf_accessor_read_index :: ( accessor: *cgltf_accessor, index: cgltf_size ) -> cgltf_size #foreign cgltflib;
 cgltf_accessor_unpack_floats :: ( accessor: *cgltf_accessor, out: *cgltf_float, float_count: cgltf_size ) -> cgltf_size #foreign cgltflib;
 
 cgltf_num_components :: ( type: cgltf_type ) -> cgltf_size #foreign cgltflib;
+cgltf_component_size :: ( component_type: cgltf_component_type ) -> cgltf_size #foreign cgltflib;
+cgltf_calc_size :: ( type: cgltf_type, component_type: cgltf_component_type ) -> cgltf_size #foreign cgltflib;
 
+/* this function is deprecated and will be removed in the future; use cgltf_extras::data instead */
 cgltf_copy_extras_json :: ( data: *cgltf_data, extras: *cgltf_extras, dest: *u8, dest_size: *cgltf_size ) -> cgltf_result #foreign cgltflib;
 
 #scope_file
