@@ -293,15 +293,16 @@ cgltf_texture_view :: struct {
 cgltf_pbr_metallic_roughness :: struct {
 	base_color_texture: cgltf_texture_view;
 	metallic_roughness_texture: cgltf_texture_view;
+
 	base_color_factor: [4]cgltf_float;
 	metallic_factor: cgltf_float;
 	roughness_factor: cgltf_float;
-	extras: cgltf_extras;
 }
 
 cgltf_pbr_specular_glossiness :: struct {
 	diffuse_texture: cgltf_texture_view;
 	specular_glossiness_texture: cgltf_texture_view;
+
 	diffuse_factor: [4]cgltf_float;
 	specular_factor: [3]cgltf_float;
 	glossiness_factor: cgltf_float;
@@ -311,6 +312,7 @@ cgltf_clearcoat :: struct {
 	clearcoat_texture: cgltf_texture_view;
 	clearcoat_roughness_texture: cgltf_texture_view;
 	clearcoat_normal_texture: cgltf_texture_view;
+
 	clearcoat_factor: cgltf_float;
 	clearcoat_roughness_factor: cgltf_float;
 }
@@ -657,7 +659,7 @@ cgltf_parse_file :: ( options: *cgltf_options, path: *u8, out_data: **cgltf_data
 cgltf_load_buffers :: ( options: *cgltf_options, data: *cgltf_data, gltf_path: *u8 ) -> cgltf_result #foreign cgltflib;
 cgltf_load_buffer_base64 :: ( options: *cgltf_options, size: cgltf_size, base64: *u8, out_data: **void ) -> cgltf_result #foreign cgltflib;
 
-cgltf_decode_string :: ( string: *u8 ) -> cgltf_size #foreign cgltflib;
+cgltf_decode_string :: ( str: *u8 ) -> cgltf_size #foreign cgltflib;
 cgltf_decode_uri :: ( uri: *u8 ) -> cgltf_size #foreign cgltflib;
 
 cgltf_validate :: ( data: *cgltf_data ) -> cgltf_result #foreign cgltflib;
