@@ -11,6 +11,8 @@
 		string.["-Isrc", "-D_CRT_SECURE_NO_WARNINGS"];
 	}
 
-	build_cpp_static_lib( "cgltf", "src/cgltf.cpp", extra=extra );
+	files :: string.["src/cgltf.cpp", "src/cgltf_write.cpp"];
+
+	build_cpp_static_lib( "cgltf", ..files, extra=extra );
 	set_build_options_dc( .{do_output=false} );
 };
